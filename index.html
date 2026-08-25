@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kirakuna – IT-drift og infrastruktur</title>
+  <title>Kirakuna – IT-drift og infrastruktur i Oslo</title>
+  <meta name="description" content="Kirakuna leverer IT-drift, UniFi-nettverk, overvåking og Microsoft 365 til bedrifter i Oslo. 90+ lokasjoner driftet, 24/7 beredskap.">
+  <link rel="canonical" href="https://kirakuna.no/">
+  <meta property="og:title" content="Kirakuna – IT-drift og infrastruktur">
+  <meta property="og:description" content="Pålitelig IT-drift, nettverksinfrastruktur og overvåking for bedrifter som ikke har råd til nedetid.">
+  <meta property="og:url" content="https://kirakuna.no/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="nb_NO">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%230A1628%22/><text x=%2250%22 y=%2268%22 font-family=%22sans-serif%22 font-size=%2255%22 font-weight=%22bold%22 fill=%22%2300D4FF%22 text-anchor=%22middle%22>K</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,6 +20,7 @@
       --white:#FFFFFF; --off:#E8F0F7; --muted:#7A9AB8; --card-bg:#0F2040;
     }
     html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 7rem; }
     body { background:var(--navy); color:var(--white); font-family:'Inter',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
 
     /* TOPBAR */
@@ -39,6 +48,11 @@
     nav ul a:hover { color:var(--cyan); }
     .nav-cta { background:transparent; border:1px solid var(--cyan); color:var(--cyan)!important; padding:0.5rem 1.2rem; border-radius:4px; transition:background 0.2s,color 0.2s!important; }
     .nav-cta:hover { background:var(--cyan)!important; color:var(--navy)!important; }
+    .hamburger { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; flex-direction:column; gap:5px; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--white); transition:transform 0.25s, opacity 0.25s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
     /* HERO */
     #hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:10rem 4rem 4rem; overflow:hidden; }
@@ -98,6 +112,35 @@
     .vendor-cat { font-size:0.68rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
     .vendor-badge { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--cyan); background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2); border-radius:3px; padding:0.15rem 0.45rem; }
 
+    /* UTSTYR / TILBUD */
+    #utstyr { background:var(--card-bg); }
+    .product-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; margin-bottom:2.5rem; }
+    .product-card { background:var(--navy); border:1px solid rgba(0,212,255,0.12); border-radius:8px; padding:2rem; display:flex; flex-direction:column; gap:0.75rem; transition:border-color 0.2s, transform 0.2s; }
+    .product-card:hover { border-color:var(--cyan); transform:translateY(-3px); }
+    .product-icon { font-size:1.75rem; }
+    .product-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:600; }
+    .product-card p { font-size:0.85rem; color:var(--muted); line-height:1.65; }
+    .product-examples { font-size:0.75rem; color:var(--cyan-dim); letter-spacing:0.03em; margin-top:auto; padding-top:0.5rem; border-top:1px solid rgba(255,255,255,0.06); }
+    .tilbud-cta { background:var(--navy); border:1px solid rgba(0,212,255,0.25); border-radius:10px; padding:2.5rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+    .tilbud-cta-text h3 { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; margin-bottom:0.4rem; }
+    .tilbud-cta-text p { font-size:0.9rem; color:var(--muted); max-width:480px; }
+
+    /* KURS */
+    #kurs { background:var(--navy); }
+    .kurs-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.25rem; margin-bottom:2rem; }
+    .kurs-card { background:var(--card-bg); border:1px solid rgba(0,212,255,0.12); border-radius:8px; padding:2.25rem; display:flex; flex-direction:column; gap:0.8rem; transition:border-color 0.2s, transform 0.2s; }
+    .kurs-card:hover { border-color:var(--cyan); transform:translateY(-3px); }
+    .kurs-tag { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--cyan); }
+    .kurs-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1.25rem; font-weight:700; }
+    .kurs-card p { font-size:0.875rem; color:var(--muted); line-height:1.7; flex:1; }
+    .kurs-detaljer { display:flex; flex-direction:column; gap:0.35rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.9rem; }
+    .kurs-detaljer span { font-size:0.8rem; color:var(--off); }
+    .kurs-detaljer span b { color:var(--cyan); font-weight:600; }
+    .kurs-pris { font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:700; margin-top:0.4rem; }
+    .kurs-pris small { font-size:0.72rem; font-weight:400; color:var(--muted); display:block; }
+    .kurs-partner { font-size:0.8rem; color:var(--muted); }
+    .kurs-partner a { color:var(--cyan); text-decoration:none; }
+
     /* PARTNERS */
     #partnere { background:var(--card-bg); }
     .partners-row { display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:1rem; }
@@ -138,7 +181,11 @@
     @media (max-width:768px) {
       .topbar { padding:0.5rem 1.5rem; }
       nav { padding:1rem 1.5rem; top:2rem; }
-      nav ul { display:none; }
+      .hamburger { display:flex; }
+      nav ul { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0; background:rgba(10,22,40,0.98); backdrop-filter:blur(12px); border-bottom:1px solid rgba(0,212,255,0.15); padding:1rem 0; }
+      nav ul.open { display:flex; }
+      nav ul li { padding:0.85rem 1.5rem; }
+      .nav-cta { display:inline-block; }
       section { padding:4rem 1.5rem; }
       #hero { padding:7rem 1.5rem 3rem; }
       footer { padding:2rem 1.5rem; flex-direction:column; align-items:flex-start; }
@@ -157,10 +204,15 @@
 
 <nav>
   <a href="#" class="logo">Kira<span>kuna</span></a>
-  <ul>
+  <button class="hamburger" aria-label="Meny" aria-expanded="false" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="mobile-menu">
     <li><a href="#tjenester">Tjenester</a></li>
     <li><a href="#kunder">Kunder</a></li>
     <li><a href="#leverandorer">Leverandører</a></li>
+    <li><a href="#utstyr">Utstyr</a></li>
+    <li><a href="#kurs">Kurs</a></li>
     <li><a href="#partnere">Partnere</a></li>
     <li><a href="#teamet">Teamet</a></li>
     <li><a href="#kontakt" class="nav-cta">Kontakt oss</a></li>
@@ -170,9 +222,9 @@
 <section id="hero">
   <canvas id="network-canvas"></canvas>
   <div class="hero-content">
-    <p class="eyebrow">IT-drift og infrastruktur</p>
+    <p class="eyebrow">IT-drift · UniFi-spesialister</p>
     <h1>Vi holder<br>nettet ditt<br><em>oppe</em></h1>
-    <p class="hero-sub">Kirakuna leverer pålitelig IT-drift, nettverksinfrastruktur og overvåking til bedrifter som ikke har råd til nedetid.</p>
+    <p class="hero-sub">Kirakuna leverer pålitelig IT-drift, nettverk og kameraovervåking bygget på Ubiquiti UniFi — til bedrifter som ikke har råd til nedetid.</p>
     <div class="hero-actions">
       <a href="#kontakt" class="btn-primary">Ta kontakt</a>
       <a href="#tjenester" class="btn-ghost">Se hva vi gjør</a>
@@ -190,11 +242,11 @@
 <section id="tjenester">
   <p class="section-label">Tjenester</p>
   <h2>Hva vi leverer</h2>
-  <p class="section-intro">Vi tar ansvar for infrastrukturen slik at du kan fokusere på det du gjør best. Fra nettverksoppsett til løpende drift og overvåking.</p>
+  <p class="section-intro">Vi jobber nesten utelukkende med Ubiquiti UniFi — én plattform vi kan ut og inn, i stedet for litt av alt. Det gir raskere feilsøking, forutsigbar drift og løsninger som spiller sammen fra dag én.</p>
   <div class="services-grid">
-    <div class="service-card"><div class="service-icon">🌐</div><h3>Nettverksinfrastruktur</h3><p>Design, installasjon og konfigurering av nettverk basert på UniFi. Skalerbare løsninger for enkeltlokasjoner og distribuerte selskaper.</p></div>
-    <div class="service-card"><div class="service-icon">🔒</div><h3>Overvåkingsutstyr</h3><p>Installasjon og drift av kamera- og sikkerhetssystemer fra UniFi Protect. Fjerntilgang og sentralisert administrasjon.</p></div>
-    <div class="service-card"><div class="service-icon">🛠️</div><h3>Løpende IT-drift</h3><p>Retineravtaler for daglig drift, vedlikehold og feilretting. Vi er det du ikke ser — helt til noe går galt.</p></div>
+    <div class="service-card"><div class="service-icon">🌐</div><h3>UniFi-nettverk</h3><p>Design, installasjon og drift av komplette UniFi-nettverk — gateways, switcher og aksesspunkter. Skalerbart fra én butikk til titalls lokasjoner under sentral styring.</p></div>
+    <div class="service-card"><div class="service-icon">🔒</div><h3>UniFi Protect-overvåking</h3><p>Kameraovervåking på UniFi Protect: prosjektering, montering og drift. Lokal lagring uten månedsavgift, fjerntilgang og sentralisert administrasjon av alle lokasjoner.</p></div>
+    <div class="service-card"><div class="service-icon">🛠️</div><h3>Løpende IT-drift</h3><p>Driftsavtaler for daglig drift, vedlikehold og feilretting. Vi er det du ikke ser — helt til noe går galt.</p></div>
     <div class="service-card"><div class="service-icon">☁️</div><h3>Microsoft 365</h3><p>Oppsett og administrasjon av M365-tenants, Exchange, Teams og SharePoint. Vi sørger for at samhandlingsverktøyene fungerer.</p></div>
     <div class="service-card"><div class="service-icon">📡</div><h3>VPN og fjerntilgang</h3><p>Sikker tilkobling mellom lokasjoner og ansatte på farten. Konfigurasjon av site-to-site og klient-VPN-løsninger.</p></div>
     <div class="service-card"><div class="service-icon">🔧</div><h3>Rådgivning og prosjekt</h3><p>Fra behovsanalyse til ferdig installert løsning. Vi samarbeider tett med strøm-, fiber- og spesialentreprenører.</p></div>
@@ -221,12 +273,12 @@
   <h2>Merkevarer vi forhandler</h2>
   <p class="section-intro">Vi er autorisert forhandler av ledende IT-merker og kan skaffe, levere og konfigurere produkter fra et bredt sortiment — alt fra bærbare og programvare til nettverksutstyr og servere.</p>
   <div class="vendor-grid">
+    <div class="vendor-card" style="border-color:rgba(0,212,255,0.45);"><div class="vendor-logo">Ubiquiti</div><div class="vendor-cat">Nettverk, UniFi &amp; Protect</div><div class="vendor-badge">Spesialist</div></div>
     <div class="vendor-card"><div class="vendor-logo">Microsoft</div><div class="vendor-cat">Programvare &amp; sky</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">Apple</div><div class="vendor-cat">Mac, iPad &amp; iPhone</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">Lenovo</div><div class="vendor-cat">PC &amp; arbeidsstasjoner</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">HP</div><div class="vendor-cat">PC, print &amp; server</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">Adobe</div><div class="vendor-cat">Kreativprogramvare</div><div class="vendor-badge">Forhandler</div></div>
-    <div class="vendor-card"><div class="vendor-logo">Ubiquiti</div><div class="vendor-cat">Nettverk &amp; UniFi</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">Samsung</div><div class="vendor-cat">Skjermer &amp; mobil</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">Logitech</div><div class="vendor-cat">Periferiutstyr</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">Cisco</div><div class="vendor-cat">Bedriftsnett &amp; sikkerhet</div><div class="vendor-badge">Forhandler</div></div>
@@ -234,6 +286,92 @@
     <div class="vendor-card"><div class="vendor-logo">Epson</div><div class="vendor-cat">Skrivere &amp; projektor</div><div class="vendor-badge">Forhandler</div></div>
     <div class="vendor-card"><div class="vendor-logo">APC</div><div class="vendor-cat">UPS &amp; strømvern</div><div class="vendor-badge">Forhandler</div></div>
   </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="utstyr">
+  <p class="section-label">Utstyr</p>
+  <h2>Trenger du utstyr? Vi skaffer det</h2>
+  <p class="section-intro">Som autorisert forhandler leverer vi alt av IT-utstyr til konkurransedyktige priser — med rådgivning, konfigurasjon og installasjon inkludert om ønskelig. Fortell oss hva du trenger, så får du et uforpliktende tilbud.</p>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-icon">💻</div>
+      <h3>PC og Mac</h3>
+      <p>Bærbare, stasjonære og arbeidsstasjoner til bedrift — ferdig konfigurert med programvare og innmelding i M365.</p>
+      <div class="product-examples">Lenovo ThinkPad · HP EliteBook · MacBook</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">📡</div>
+      <h3>Nettverksutstyr</h3>
+      <p>Alt fra aksesspunkter til switcher og gateways. Vi designer, leverer og monterer komplette UniFi-løsninger.</p>
+      <div class="product-examples">UniFi Dream Machine · U7 Pro · Switcher</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🎥</div>
+      <h3>Overvåking</h3>
+      <p>Kamerapakker for butikk, lager og kontor med lokal lagring og fjerntilgang — uten månedsavgift.</p>
+      <div class="product-examples">UniFi Protect · G5 / G6-kameraer · NVR</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🖥️</div>
+      <h3>Skjermer og tilbehør</h3>
+      <p>Skjermer, dokkingstasjoner, møteromsutstyr og periferi fra ledende merker.</p>
+      <div class="product-examples">Samsung · Logitech · APC UPS</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">📄</div>
+      <h3>Programvare og lisenser</h3>
+      <p>Microsoft 365, Adobe Creative Cloud og andre bedriftslisenser — med riktig lisensmodell for din bedrift.</p>
+      <div class="product-examples">M365 Business · Adobe CC · Windows Pro</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">🖨️</div>
+      <h3>Print og skann</h3>
+      <p>Skrivere og multifunksjonsmaskiner for kontor — med oppsett mot nettverk og skytjenester.</p>
+      <div class="product-examples">HP LaserJet · Epson EcoTank</div>
+    </div>
+  </div>
+  <div class="tilbud-cta">
+    <div class="tilbud-cta-text">
+      <h3>Be om tilbud</h3>
+      <p>Send oss en liste over hva du trenger — eller beskriv behovet, så foreslår vi riktig utstyr. Svar normalt innen én arbeidsdag.</p>
+    </div>
+    <a href="mailto:post@kirakuna.no?subject=Foresp%C3%B8rsel%20om%20tilbud&body=Hei%2C%0A%0AVi%20%C3%B8nsker%20tilbud%20p%C3%A5%20f%C3%B8lgende%3A%0A%0A-%20%0A%0AMed%20vennlig%20hilsen%2C%0A" class="btn-primary">Send forespørsel →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="kurs">
+  <p class="section-label">Kurs</p>
+  <h2>AI-kurs for bedrifter</h2>
+  <p class="section-intro">Vi hjelper teamet ditt å ta i bruk AI i arbeidshverdagen — ChatGPT, Claude, Microsoft Copilot og mer. Praktisk, hands-on og uten hype, levert av kursholder Tiago i samarbeid med Synapse Academy.</p>
+  <div class="kurs-grid">
+    <div class="kurs-card">
+      <span class="kurs-tag">Anbefalt start</span>
+      <h3>Startkurs</h3>
+      <p>Vi begynner med en times kartlegging av teamets arbeidshverdag, verktøy og mål — deretter skreddersys fem timer kurs rundt det som faktisk gir verdi for dere.</p>
+      <div class="kurs-detaljer">
+        <span><b>1 time</b> kartlegging av behov og verktøy</span>
+        <span><b>5 timer</b> praktisk kurs tilpasset teamet</span>
+        <span><b>Kursholder:</b> Tiago</span>
+      </div>
+      <div class="kurs-pris">7 800 kr<small>1 300 kr/time · 6 timer totalt</small></div>
+    </div>
+    <div class="kurs-card">
+      <span class="kurs-tag">For team i gang</span>
+      <h3>Standardkurs</h3>
+      <p>Seks timer fokusert opplæring i verktøyene dere bruker — fra effektive prompts til automatisering av daglige oppgaver. Passer team som vil ta neste steg med AI.</p>
+      <div class="kurs-detaljer">
+        <span><b>6 timer</b> praktisk kurs</span>
+        <span><b>Verktøy:</b> ChatGPT, Claude, Copilot m.fl.</span>
+        <span><b>Kursholder:</b> Tiago</span>
+      </div>
+      <div class="kurs-pris">7 800 kr<small>1 300 kr/time · 6 timer totalt</small></div>
+    </div>
+  </div>
+  <p class="kurs-partner">Kursene leveres i samarbeid med <a href="https://synapse-academy.org/" target="_blank" rel="noopener">Synapse Academy</a> — se hele kurskatalogen der, eller <a href="mailto:post@kirakuna.no?subject=Kursforesp%C3%B8rsel">send oss en e-post</a> for å booke.</p>
 </section>
 
 <div class="divider"></div>
@@ -296,10 +434,21 @@
 <footer>
   <a href="#" class="logo">Kira<span>kuna</span></a>
   <span class="footer-copy">© 2026 Kirakuna AS. Alle rettigheter reservert.</span>
-  <div class="footer-links"><a href="#">Personvern</a><a href="#">Vilkår</a></div>
+  <div class="footer-links"><a href="mailto:post@kirakuna.no">post@kirakuna.no</a><a href="tel:+4747442800">474 42 800</a></div>
 </footer>
 
 <script>
+  function toggleMenu(btn) {
+    const menu = document.getElementById('mobile-menu');
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  }
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('open');
+  }));
+
   const canvas = document.getElementById('network-canvas');
   const ctx = canvas.getContext('2d');
   let W, H, nodes, animFrame;
@@ -314,6 +463,7 @@
   }
   resize();nodes=makeNodes(65);draw();
   window.addEventListener('resize',()=>{cancelAnimationFrame(animFrame);resize();nodes=makeNodes(65);draw();});
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden){cancelAnimationFrame(animFrame);} else {draw();} });
 </script>
 </body>
 </html>
