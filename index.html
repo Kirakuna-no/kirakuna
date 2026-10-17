@@ -192,6 +192,23 @@
       .vendor-grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); }
     }
     @media (prefers-reduced-motion:reduce) { #network-canvas { display:none; } }
+    /* Seasonal Halloween accents: remove this block and the matching SVG to revert. */
+    #hero { background:radial-gradient(ellipse at 94% 66%,rgba(224,119,42,0.10),transparent 38%); }
+    #hero .eyebrow::before { background:#E9A15B; }
+    #hero .btn-ghost { border-color:rgba(233,161,91,0.5); }
+    #hero .btn-ghost:hover { border-color:#E9A15B; color:#F2BA83; }
+    .halloween-art { position:absolute; right:4%; bottom:12rem; width:clamp(120px,16vw,220px); height:auto; pointer-events:none; user-select:none; }
+    @media (max-width:1100px) {
+      .halloween-art { width:110px; right:2%; bottom:11rem; opacity:0.8; }
+    }
+    @media (max-width:768px) {
+      #hero { flex-direction:column; }
+      .halloween-art { width:76px; right:1rem; bottom:1rem; opacity:0.85; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      #hero a { transition:none; }
+    }
   </style>
 </head>
 <body>
@@ -221,6 +238,39 @@
 
 <section id="hero">
   <canvas id="network-canvas"></canvas>
+  <!-- Decorative only: static, silent, and excluded from the accessibility tree. -->
+  <svg class="halloween-art" viewBox="0 0 240 230" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="pumpkin-skin" x1="0" y1="0" x2="0.8" y2="1">
+        <stop stop-color="#E9A15B"/><stop offset="1" stop-color="#A95125"/>
+      </linearGradient>
+    </defs>
+    <g fill="#7892AD" opacity="0.45">
+      <path d="M146 35q-13-18-32-14 8 8 7 19 12-5 20 7l5 6 5-6q8-12 20-7-1-11 7-19-19-4-32 14Z"/>
+      <path d="M204 70q-8-11-20-9 5 5 4 12 8-3 13 4l3 4 3-4q5-7 13-4-1-7 4-12-12-2-20 9Z"/>
+    </g>
+    <ellipse cx="120" cy="211" rx="101" ry="9" fill="#050E1C" opacity="0.4"/>
+    <g transform="translate(12 70)">
+      <path d="M66 34q-3-19 9-26l8 5q-12 6-10 23" fill="#71816A"/>
+      <g fill="url(#pumpkin-skin)" stroke="#E9A15B" stroke-opacity="0.35" stroke-width="1.5">
+        <ellipse cx="44" cy="88" rx="31" ry="49"/>
+        <ellipse cx="91" cy="88" rx="31" ry="49"/>
+        <ellipse cx="67" cy="86" rx="34" ry="54"/>
+      </g>
+      <g fill="#162136">
+        <path d="m43 75 15 4-13 9Zm47 0-15 4 13 9ZM63 91l5-8 5 8Z"/>
+        <path d="M43 101q24 19 49-1-5 25-25 25-17-1-24-24Z"/>
+      </g>
+      <path d="M61 106h9v8h-9Z" fill="#E9A15B"/>
+    </g>
+    <g transform="translate(145 137) rotate(8 35 35)">
+      <path d="M34 10q-1-10 7-15" fill="none" stroke="#71816A" stroke-width="6"/>
+      <g fill="#BD713D" stroke="#E9A15B" stroke-opacity="0.35" stroke-width="1.5">
+        <ellipse cx="21" cy="39" rx="20" ry="29"/><ellipse cx="49" cy="39" rx="20" ry="29"/>
+        <ellipse cx="35" cy="38" rx="19" ry="32"/>
+      </g>
+    </g>
+  </svg>
   <div class="hero-content">
     <p class="eyebrow">IT-drift · UniFi-spesialister</p>
     <h1>Vi holder<br>nettet ditt<br><em>oppe</em></h1>
