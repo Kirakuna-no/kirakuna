@@ -337,8 +337,8 @@
       <a href="#tjenester" class="btn-ghost">Se hva vi gjør</a>
     </div>
     <div class="halloween-sound">
-      <button class="sound-toggle" type="button" aria-pressed="false" aria-describedby="sound-note">Halloween-lyd: av</button>
-      <p class="sound-note" id="sound-note" role="status">Valgfri, lavmælt spøkelsesstemning. Slås av når du bytter fane.</p>
+      <button class="sound-toggle" type="button" aria-pressed="false" aria-describedby="sound-note">Halloween-lyd: av – start lyd</button>
+      <p class="sound-note" id="sound-note" role="status">Spøkelsesstemning starter automatisk hvis nettleseren tillater det. Slås av når du bytter fane.</p>
     </div>
   </div>
   <div class="hero-stats">
@@ -575,7 +575,7 @@
 </footer>
 
 <script>
-  // Locally synthesized ambience: no audio requests, storage, autoplay or scroll triggers.
+  // Native Web Audio autoplay only when permitted; no unrelated gesture unlocks.
   (() => {
     const button = document.querySelector('.sound-toggle');
     const note = document.getElementById('sound-note');
@@ -583,30 +583,31 @@
     let active = null;
     const render = on => {
       button.setAttribute('aria-pressed', String(on));
-      button.textContent = `Halloween-lyd: ${on ? 'på – slå av' : 'av'}`;
+      button.textContent = `Halloween-lyd: ${on ? 'på – slå av' : 'av – start lyd'}`;
     };
-    async function stop(immediate = false) {
+    function stop() {
       const sound = active;
       active = null;
       render(false);
       if (!sound) return;
+      clearTimeout(sound.timeout);
+      if (sound.cancel) sound.cancel();
       const { context, master, sources } = sound;
       const now = context.currentTime;
-      master.gain.cancelScheduledValues(now);
-      master.gain.setValueAtTime(immediate ? 0 : master.gain.value, now);
-      if (!immediate) master.gain.linearRampToValueAtTime(0, now + 0.15);
-      sources.forEach(source => source.stop(now + (immediate ? 0 : 0.16)));
+      master.gain.cancelScheduledValues(0);
+      master.gain.value = 0;
+      master.gain.setValueAtTime(0, 0);
+      sources.forEach(source => { try { source.stop(); } catch (_) { /* Already stopped. */ } });
       // Hidden pages must not depend on a throttled timer to become silent.
-      if (immediate) await context.close().catch(() => {});
-      else setTimeout(() => { context.close().catch(() => {}); }, 180);
+      context.close().catch(() => {});
     }
     if (!AudioEngine) {
       button.disabled = true;
       note.textContent = 'Nettleseren støtter ikke denne valgfrie lyden.';
       return;
     }
-    button.addEventListener('click', async () => {
-      if (active) { await stop(); return; }
+    async function start(autoplay = false) {
+      if (active || document.hidden) return;
       let sound;
       try {
         const context = new AudioEngine();
@@ -615,7 +616,14 @@
         master.connect(context.destination);
         sound = { context, master, sources:[] };
         active = sound;
-        render(true);
+        // Close a blocked context immediately so unrelated gestures cannot unlock it.
+        if (autoplay && context.state !== 'running') {
+          stop();
+          note.textContent = 'Automatisk lyd er blokkert. Trykk på «start lyd» for å spille.';
+          return;
+        }
+        render(false);
+        button.textContent = 'Halloween-lyd: starter – avbryt';
         // Soft minor harmony with very slow pitch drift; no sharp transients.
         [110, 164.81, 220.4, 261.63].forEach((frequency, index) => {
           const tone = context.createOscillator();
@@ -633,24 +641,44 @@
           tone.start();
           drift.start();
         });
-        await context.resume();
+        // A browser may leave resume pending; stop and timeout both settle our wait.
+        const cancelled = new Promise(resolve => { sound.cancel = () => resolve(false); });
+        const timedOut = new Promise(resolve => { sound.timeout = setTimeout(() => resolve(false), 1500); });
+        const resumed = autoplay ? true : await Promise.race([context.resume().then(() => true), cancelled, timedOut]);
+        clearTimeout(sound.timeout);
         // A second click or tab switch may have cancelled a pending resume.
         if (active !== sound) return;
-        if (document.hidden || context.state !== 'running') { await stop(true); return; }
-        master.gain.linearRampToValueAtTime(0.045, context.currentTime + 2);
-        note.textContent = 'Lavmælt spøkelsesstemning. Slå av med knappen eller ved å bytte fane.';
+        if (!resumed || document.hidden || context.state !== 'running') {
+          stop();
+          note.textContent = 'Lyden er av. Trykk på «start lyd» for å prøve igjen.';
+          return;
+        }
+        master.gain.linearRampToValueAtTime(0.07, context.currentTime + 2);
+        render(true);
+        note.textContent = 'Spøkelsesstemning spiller. Slå av med knappen eller ved å bytte fane.';
+        context.addEventListener('statechange', () => {
+          if (active === sound && context.state !== 'running') stop();
+        });
       } catch (_) {
-        if (active === sound) await stop(true);
+        if (sound && active !== sound) return;
+        stop();
         note.textContent = 'Lyden kunne ikke startes. Du kan prøve igjen med knappen.';
       }
+    }
+    button.addEventListener('click', () => {
+      if (active) {
+        stop();
+        note.textContent = 'Lyden er av. Trykk på knappen for å starte igjen.';
+      } else start();
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        stop(true);
+        stop();
         note.textContent = 'Lyden er av. Trykk på knappen for å starte igjen.';
       }
     });
-    window.addEventListener('pagehide', () => { stop(true); });
+    window.addEventListener('pagehide', stop);
+    start(true);
   })();
   // A quiet, in-flow greeting: never overlays contact links or takes focus.
   (() => {
