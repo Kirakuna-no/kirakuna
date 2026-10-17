@@ -247,6 +247,13 @@
     @media (prefers-reduced-motion:reduce) {
       .halloween-greeting { animation:none; }
     }
+    /* Optional sound sits in the page flow, never over navigation or contact links. */
+    .halloween-sound { margin-top:1.5rem; max-width:100%; }
+    .sound-toggle { min-height:44px; max-width:100%; padding:0.6rem 1rem; border:1px solid #B77743; border-radius:6px; background:#152137; color:#F2BA83; font:500 0.875rem 'Inter',sans-serif; cursor:pointer; }
+    .sound-toggle:hover, .sound-toggle[aria-pressed="true"] { background:#30283A; border-color:#F2BA83; }
+    .sound-toggle:focus-visible { outline:2px solid var(--cyan); outline-offset:4px; }
+    .sound-note { margin-top:0.5rem; font-size:0.75rem; color:var(--muted); }
+    @media (min-width:769px) { #hero { padding-bottom:15rem; } }
   </style>
 </head>
 <body>
@@ -328,6 +335,10 @@
     <div class="hero-actions">
       <a href="#kontakt" class="btn-primary">Ta kontakt</a>
       <a href="#tjenester" class="btn-ghost">Se hva vi gjør</a>
+    </div>
+    <div class="halloween-sound">
+      <button class="sound-toggle" type="button" aria-pressed="false" aria-describedby="sound-note">Halloween-lyd: av</button>
+      <p class="sound-note" id="sound-note" role="status">Valgfri, lavmælt spøkelsesstemning. Slås av når du bytter fane.</p>
     </div>
   </div>
   <div class="hero-stats">
@@ -564,6 +575,83 @@
 </footer>
 
 <script>
+  // Locally synthesized ambience: no audio requests, storage, autoplay or scroll triggers.
+  (() => {
+    const button = document.querySelector('.sound-toggle');
+    const note = document.getElementById('sound-note');
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    let active = null;
+    const render = on => {
+      button.setAttribute('aria-pressed', String(on));
+      button.textContent = `Halloween-lyd: ${on ? 'på – slå av' : 'av'}`;
+    };
+    async function stop(immediate = false) {
+      const sound = active;
+      active = null;
+      render(false);
+      if (!sound) return;
+      const { context, master, sources } = sound;
+      const now = context.currentTime;
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(immediate ? 0 : master.gain.value, now);
+      if (!immediate) master.gain.linearRampToValueAtTime(0, now + 0.15);
+      sources.forEach(source => source.stop(now + (immediate ? 0 : 0.16)));
+      // Hidden pages must not depend on a throttled timer to become silent.
+      if (immediate) await context.close().catch(() => {});
+      else setTimeout(() => { context.close().catch(() => {}); }, 180);
+    }
+    if (!AudioEngine) {
+      button.disabled = true;
+      note.textContent = 'Nettleseren støtter ikke denne valgfrie lyden.';
+      return;
+    }
+    button.addEventListener('click', async () => {
+      if (active) { await stop(); return; }
+      let sound;
+      try {
+        const context = new AudioEngine();
+        const master = context.createGain();
+        master.gain.value = 0;
+        master.connect(context.destination);
+        sound = { context, master, sources:[] };
+        active = sound;
+        render(true);
+        // Soft minor harmony with very slow pitch drift; no sharp transients.
+        [110, 164.81, 220.4, 261.63].forEach((frequency, index) => {
+          const tone = context.createOscillator();
+          const level = context.createGain();
+          const drift = context.createOscillator();
+          const depth = context.createGain();
+          tone.type = 'sine';
+          tone.frequency.value = frequency;
+          level.gain.value = index === 0 ? 0.35 : 0.16;
+          drift.frequency.value = 0.07 + index * 0.019;
+          depth.gain.value = 2.5;
+          drift.connect(depth).connect(tone.detune);
+          tone.connect(level).connect(master);
+          sound.sources.push(tone, drift);
+          tone.start();
+          drift.start();
+        });
+        await context.resume();
+        // A second click or tab switch may have cancelled a pending resume.
+        if (active !== sound) return;
+        if (document.hidden || context.state !== 'running') { await stop(true); return; }
+        master.gain.linearRampToValueAtTime(0.045, context.currentTime + 2);
+        note.textContent = 'Lavmælt spøkelsesstemning. Slå av med knappen eller ved å bytte fane.';
+      } catch (_) {
+        if (active === sound) await stop(true);
+        note.textContent = 'Lyden kunne ikke startes. Du kan prøve igjen med knappen.';
+      }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stop(true);
+        note.textContent = 'Lyden er av. Trykk på knappen for å starte igjen.';
+      }
+    });
+    window.addEventListener('pagehide', () => { stop(true); });
+  })();
   // A quiet, in-flow greeting: never overlays contact links or takes focus.
   (() => {
     const greeting = document.getElementById('halloween-greeting');
