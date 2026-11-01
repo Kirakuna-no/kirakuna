@@ -191,47 +191,12 @@
       footer { padding:2rem 1.5rem; flex-direction:column; align-items:flex-start; }
       .vendor-grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); }
     }
-    @media (prefers-reduced-motion:reduce) { #network-canvas { display:none; } }
-    /* Seasonal Halloween accents: remove this block and the matching SVG to revert. */
-    #hero { background:radial-gradient(ellipse at 94% 66%,rgba(224,119,42,0.10),transparent 38%); }
-    #hero .eyebrow::before { background:#E9A15B; }
-    #hero .btn-ghost { border-color:rgba(233,161,91,0.5); }
-    #hero .btn-ghost:hover { border-color:#E9A15B; color:#F2BA83; }
-    .halloween-art { position:absolute; right:4%; bottom:12rem; width:clamp(120px,16vw,220px); height:auto; pointer-events:none; user-select:none; }
-    @media (max-width:1100px) {
-      .halloween-art { width:110px; right:2%; bottom:11rem; opacity:0.8; }
-    }
-    @media (max-width:768px) {
-      #hero { flex-direction:column; }
-      .halloween-art { width:76px; right:1rem; bottom:1rem; opacity:0.85; }
-    }
     @media (prefers-reduced-motion:reduce) {
+      #network-canvas { display:none; }
       html { scroll-behavior:auto; }
       #hero a { transition:none; }
     }
-    /* Extra seasonal details stay outside business content and hit targets. */
-    .seasonal-defs { position:absolute; width:0; height:0; overflow:hidden; }
-    .seasonal-trim { display:flex; align-items:center; justify-content:flex-end; gap:0.75rem; height:64px; margin-bottom:1rem; pointer-events:none; }
-    .seasonal-trim svg { width:58px; height:58px; }
-    .seasonal-trim .seasonal-bat { width:68px; color:#9BAEC5; transform:rotate(-12deg); }
-    #tjenester, #utstyr, #kontakt { position:relative; }
-    .seasonal-web { position:absolute; right:0; top:0; width:100px; height:100px; color:#E9A15B; opacity:0.35; pointer-events:none; }
-    .halloween-art { width:clamp(150px,19vw,260px); }
-    .halloween-slot { width:100%; display:flex; justify-content:flex-end; min-height:144px; padding-top:1rem; }
-    .halloween-greeting { display:flex; align-items:center; gap:0.75rem; width:340px; max-width:100%; padding:0.75rem; background:#152137; border:1px solid #B77743; border-radius:12px; box-shadow:0 8px 28px #0003; animation:halloween-hello 350ms ease-out; }
-    .halloween-greeting[hidden] { display:none; }
-    .halloween-greeting svg { width:48px; height:56px; flex-shrink:0; }
-    .halloween-greeting strong { font-family:'Space Grotesk',sans-serif; color:#F2BA83; }
-    .halloween-greeting p { font-size:0.8rem; color:var(--off); }
-    .halloween-close { align-self:flex-start; flex-shrink:0; width:44px; height:44px; border:0; border-radius:6px; background:transparent; color:var(--off); font-size:1.5rem; cursor:pointer; }
-    .halloween-close:hover { background:#FFFFFF12; }
-    .halloween-close:focus-visible { outline:2px solid var(--cyan); outline-offset:2px; }
-    @keyframes halloween-hello { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-    @media (max-width:768px) {
-      .halloween-art { width:110px; bottom:0.5rem; right:0.5rem; }
-      .seasonal-web { width:70px; height:70px; }
-      .halloween-slot { justify-content:center; }
-    }
+    #print3d a, .client-name a { color:var(--cyan); text-underline-offset:0.2em; }
     /* Keep existing cards and contact details inside narrow phone screens. */
     @media (max-width:400px) {
       .topbar { padding:0.5rem 0.75rem; gap:0.65rem; }
@@ -244,32 +209,9 @@
       .btn-primary, .btn-ghost { padding-left:1.25rem; padding-right:1.25rem; }
       .footer-links { flex-wrap:wrap; gap:0.75rem; }
     }
-    @media (prefers-reduced-motion:reduce) {
-      .halloween-greeting { animation:none; }
-    }
-    /* Optional sound sits in the page flow, never over navigation or contact links. */
-    .halloween-sound { margin-top:1.5rem; max-width:100%; }
-    .sound-toggle { min-height:44px; max-width:100%; padding:0.6rem 1rem; border:1px solid #B77743; border-radius:6px; background:#152137; color:#F2BA83; font:500 0.875rem 'Inter',sans-serif; cursor:pointer; }
-    .sound-toggle:hover, .sound-toggle[aria-pressed="true"] { background:#30283A; border-color:#F2BA83; }
-    .sound-toggle:focus-visible { outline:2px solid var(--cyan); outline-offset:4px; }
-    .sound-note { margin-top:0.5rem; font-size:0.75rem; color:var(--muted); }
-    @media (min-width:769px) { #hero { padding-bottom:15rem; } }
   </style>
 </head>
 <body>
-<svg class="seasonal-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <symbol id="seasonal-pumpkin" viewBox="0 0 80 80">
-      <path d="M39 19q-2-11 7-15" fill="none" stroke="#859474" stroke-width="6"/>
-      <g fill="#D58643" stroke="#F2BA83" stroke-width="1.2"><ellipse cx="27" cy="47" rx="22" ry="26"/><ellipse cx="53" cy="47" rx="22" ry="26"/><ellipse cx="40" cy="46" rx="21" ry="28"/></g>
-      <path d="m22 39 13 4-12 7Zm36 0-13 4 12 7ZM34 52l6-8 6 8ZM23 56q17 14 34 0-4 17-17 17T23 56" fill="#162136"/>
-      <path d="M35 59h7v6h-7Z" fill="#F2BA83"/>
-    </symbol>
-    <symbol id="seasonal-bat" viewBox="0 0 100 60"><path d="M50 26Q30 0 2 9q13 12 10 29 17-8 29 9l9 9 9-9q12-17 29-9-3-17 10-29Q70 0 50 26Z" fill="currentColor"/></symbol>
-    <symbol id="seasonal-web" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M100 0H0m100 0L8 38m92-38L30 72m70-72L63 94m37-94v100M76 0q0 12 8 17t16 7M51 0q0 22 15 35t34 14M26 0q0 34 22 53t52 21M1 0q0 46 30 71t69 28"/></g></symbol>
-  </defs>
-</svg>
-
 <div class="topbar">
   <a href="tel:+4747442800"><span class="topbar-icon">📞</span>474 42 800</a>
   <span class="topbar-sep"></span>
@@ -295,39 +237,6 @@
 
 <section id="hero">
   <canvas id="network-canvas" aria-hidden="true"></canvas>
-  <!-- Decorative only: static, silent, and excluded from the accessibility tree. -->
-  <svg class="halloween-art" viewBox="0 0 240 230" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="pumpkin-skin" x1="0" y1="0" x2="0.8" y2="1">
-        <stop stop-color="#E9A15B"/><stop offset="1" stop-color="#A95125"/>
-      </linearGradient>
-    </defs>
-    <g fill="#7892AD" opacity="0.45">
-      <path d="M146 35q-13-18-32-14 8 8 7 19 12-5 20 7l5 6 5-6q8-12 20-7-1-11 7-19-19-4-32 14Z"/>
-      <path d="M204 70q-8-11-20-9 5 5 4 12 8-3 13 4l3 4 3-4q5-7 13-4-1-7 4-12-12-2-20 9Z"/>
-    </g>
-    <ellipse cx="120" cy="211" rx="101" ry="9" fill="#050E1C" opacity="0.4"/>
-    <g transform="translate(12 70)">
-      <path d="M66 34q-3-19 9-26l8 5q-12 6-10 23" fill="#71816A"/>
-      <g fill="url(#pumpkin-skin)" stroke="#E9A15B" stroke-opacity="0.35" stroke-width="1.5">
-        <ellipse cx="44" cy="88" rx="31" ry="49"/>
-        <ellipse cx="91" cy="88" rx="31" ry="49"/>
-        <ellipse cx="67" cy="86" rx="34" ry="54"/>
-      </g>
-      <g fill="#162136">
-        <path d="m43 75 15 4-13 9Zm47 0-15 4 13 9ZM63 91l5-8 5 8Z"/>
-        <path d="M43 101q24 19 49-1-5 25-25 25-17-1-24-24Z"/>
-      </g>
-      <path d="M61 106h9v8h-9Z" fill="#E9A15B"/>
-    </g>
-    <g transform="translate(145 137) rotate(8 35 35)">
-      <path d="M34 10q-1-10 7-15" fill="none" stroke="#71816A" stroke-width="6"/>
-      <g fill="#BD713D" stroke="#E9A15B" stroke-opacity="0.35" stroke-width="1.5">
-        <ellipse cx="21" cy="39" rx="20" ry="29"/><ellipse cx="49" cy="39" rx="20" ry="29"/>
-        <ellipse cx="35" cy="38" rx="19" ry="32"/>
-      </g>
-    </g>
-  </svg>
   <div class="hero-content">
     <p class="eyebrow">IT-drift · UniFi-spesialister</p>
     <h1>Vi holder<br>nettet ditt<br><em>oppe</em></h1>
@@ -335,10 +244,6 @@
     <div class="hero-actions">
       <a href="#kontakt" class="btn-primary">Ta kontakt</a>
       <a href="#tjenester" class="btn-ghost">Se hva vi gjør</a>
-    </div>
-    <div class="halloween-sound">
-      <button class="sound-toggle" type="button" aria-pressed="false" aria-describedby="sound-note">Halloween-lyd: av – start lyd</button>
-      <p class="sound-note" id="sound-note" role="status">Spøkelsesstemning starter automatisk hvis nettleseren tillater det. Slås av når du bytter fane.</p>
     </div>
   </div>
   <div class="hero-stats">
@@ -351,18 +256,13 @@
 <div class="divider"></div>
 
 <section id="tjenester">
-  <svg class="seasonal-web" aria-hidden="true" focusable="false"><use href="#seasonal-web"/></svg>
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg class="seasonal-bat" focusable="false"><use href="#seasonal-bat"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Tjenester</p>
   <h2>Hva vi leverer</h2>
   <p class="section-intro">Vi jobber nesten utelukkende med Ubiquiti UniFi — én plattform vi kan ut og inn, i stedet for litt av alt. Det gir raskere feilsøking, forutsigbar drift og løsninger som spiller sammen fra dag én.</p>
   <div class="services-grid">
     <div class="service-card"><div class="service-icon">🌐</div><h3>UniFi-nettverk</h3><p>Design, installasjon og drift av komplette UniFi-nettverk — gateways, switcher og aksesspunkter. Skalerbart fra én butikk til titalls lokasjoner under sentral styring.</p></div>
     <div class="service-card"><div class="service-icon">🔒</div><h3>UniFi Protect-overvåking</h3><p>Kameraovervåking på UniFi Protect: prosjektering, montering og drift. Lokal lagring uten månedsavgift, fjerntilgang og sentralisert administrasjon av alle lokasjoner.</p></div>
+    <div class="service-card"><div class="service-icon">🎥</div><h3>Direktesending fra kamera</h3><p>Vi kan nå strømme direkte fra kamera. Ta kontakt for å avtale visning og tilgang.</p></div>
     <div class="service-card"><div class="service-icon">🛠️</div><h3>Løpende IT-drift</h3><p>Driftsavtaler for daglig drift, vedlikehold og feilretting. Vi er det du ikke ser — helt til noe går galt.</p></div>
     <div class="service-card"><div class="service-icon">☁️</div><h3>Microsoft 365</h3><p>Oppsett og administrasjon av M365-tenants, Exchange, Teams og SharePoint. Vi sørger for at samhandlingsverktøyene fungerer.</p></div>
     <div class="service-card"><div class="service-icon">📡</div><h3>VPN og fjerntilgang</h3><p>Sikker tilkobling mellom lokasjoner og ansatte på farten. Konfigurasjon av site-to-site og klient-VPN-løsninger.</p></div>
@@ -372,18 +272,36 @@
 
 <div class="divider"></div>
 
-<section id="kunder">
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
+<section id="print3d">
+  <p class="section-label">3D-print</p>
+  <h2>Fra idé til del og prototype</h2>
+  <p class="section-intro">Vi lager 3D-printede deler og prototyper med Bambu Lab H2S — fra enkle modeller til funksjonelle deler i tekniske materialer.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🖨️</div>
+      <h3>Materialer tilpasset bruken</h3>
+      <p>H2S støtter blant annet ABS, ASA, PC, PA og PPS, samt karbon- og glassfiberforsterkede materialer, inkludert PPA og PPS. Ingen materialer er sterkest til alt: Vi velger materiale og utskriftsoppsett etter belastning, temperatur og bruksområde. Tilgjengelighet og egnethet avklares for hvert oppdrag.</p>
+      <p><a href="https://bambulab.com/en/h2s/tech-specs" target="_blank" rel="noopener">Se Bambu Labs materialspesifikasjoner →</a></p>
+    </div>
+
   </div>
+  <p class="section-intro"><a href="#kontakt">Fortell oss om delen eller prototypen du trenger →</a></p>
+</section>
+
+<div class="divider"></div>
+
+<section id="kunder">
   <p class="section-label">Kunder</p>
   <h2>De stoler på oss</h2>
-  <p class="section-intro">Vi drifter IT-infrastruktur for et voksende antall bedrifter. Her er noen av dem — og det er plass til flere.</p>
+  <p class="section-intro">Vi hjelper bedrifter med IT-infrastruktur, 3D-printede deler og prototyper. Her er noen av kundene våre — og det er plass til flere.</p>
   <div class="clients-grid">
     <div class="client-card"><div class="client-initial">SX</div><div class="client-name">SmoothieXchange AS</div><div class="client-desc">Nettverksdrift og overvåking av utstyr på tvers av alle lokasjoner.</div><div class="client-tag">Nettverksdrift</div></div>
     <div class="client-card"><div class="client-initial">FK</div><div class="client-name">Funky Kiosk Drift AS</div><div class="client-desc">IT-infrastruktur, UniFi-nettverk og løpende beredskapsavtale.</div><div class="client-tag">Infrastruktur</div></div>
     <div class="client-card"><div class="client-initial">NB</div><div class="client-name">Norsk Biogass AS</div><div class="client-desc">Microsoft 365, sikker VPN-tilgang og løpende beredskapsavtale for en internasjonal virksomhet.</div><div class="client-tag">Microsoft 365 · VPN · Sikkerhet</div></div>
+    <div class="client-card"><div class="client-initial">S</div><div class="client-name"><a href="https://www.suveren.no" target="_blank" rel="noopener">Suveren</a></div><div class="client-desc">Vi lager 3D-printede deler og prototyper for Suveren.</div><div class="client-tag">3D-print · Prototyper</div></div>
+    <div class="client-card"><div class="client-initial">SF</div><div class="client-name">Superfruits AS</div><div class="client-desc">IT-infrastruktur, UniFi-nettverk, nettverksdrift og overvåking med løpende beredskapsavtale. Vi drifter også en server for Superfruits.</div><div class="client-tag">Nettverksdrift · Serverdrift</div></div>
+    <div class="client-card"><div class="client-initial">EC</div><div class="client-name">El Camino AS</div><div class="client-desc">IT-infrastruktur, UniFi-nettverk, nettverksdrift og overvåking med løpende beredskapsavtale.</div><div class="client-tag">Nettverksdrift · Infrastruktur</div></div>
+    <div class="client-card"><div class="client-initial">AH</div><div class="client-name"><a href="https://www.proff.no/selskap/a-hokholt-arkitekter-as/oslo/arkitekttjenester/IGD20PP07U5" target="_blank" rel="noopener">A Hokholt Arkitekter AS</a></div><div class="client-desc">En av kundene våre innen arkitektur.</div><div class="client-tag">Referansekunde</div></div>
     <div class="clients-more">+ Flere kunder tilkommer</div>
   </div>
 </section>
@@ -391,10 +309,6 @@
 <div class="divider"></div>
 
 <section id="leverandorer">
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Leverandører</p>
   <h2>Merkevarer vi forhandler</h2>
   <p class="section-intro">Vi er autorisert forhandler av ledende IT-merker og kan skaffe, levere og konfigurere produkter fra et bredt sortiment — alt fra bærbare og programvare til nettverksutstyr og servere.</p>
@@ -417,12 +331,6 @@
 <div class="divider"></div>
 
 <section id="utstyr">
-  <svg class="seasonal-web" aria-hidden="true" focusable="false"><use href="#seasonal-web"/></svg>
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg class="seasonal-bat" focusable="false"><use href="#seasonal-bat"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Utstyr</p>
   <h2>Trenger du utstyr? Vi skaffer det</h2>
   <p class="section-intro">Som autorisert forhandler leverer vi alt av IT-utstyr til konkurransedyktige priser — med rådgivning, konfigurasjon og installasjon inkludert om ønskelig. Fortell oss hva du trenger, så får du et uforpliktende tilbud.</p>
@@ -476,10 +384,6 @@
 <div class="divider"></div>
 
 <section id="kurs">
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Kurs</p>
   <h2>AI-kurs for bedrifter</h2>
   <p class="section-intro">Vi hjelper teamet ditt å ta i bruk AI i arbeidshverdagen — ChatGPT, Claude, Microsoft Copilot og mer. Praktisk, hands-on og uten hype, levert av kursholder Tiago i samarbeid med Synapse Academy.</p>
@@ -513,10 +417,6 @@
 <div class="divider"></div>
 
 <section id="partnere">
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Partnere</p>
   <h2>Sterkere sammen</h2>
   <p class="section-intro">Vi samarbeider med spesialiserte aktører for å levere komplette løsninger — fra fiber inn i veggen til konfigurert og driftet nettverk.</p>
@@ -530,10 +430,6 @@
 <div class="divider"></div>
 
 <section id="teamet">
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Teamet</p>
   <h2>Menneskene bak</h2>
   <p class="section-intro">Kirakuna er to fagfolk med komplementær kompetanse — en som bygger virksomheten og en som holder infrastrukturen oppe.</p>
@@ -556,12 +452,6 @@
 <div class="divider"></div>
 
 <section id="kontakt">
-  <svg class="seasonal-web" aria-hidden="true" focusable="false"><use href="#seasonal-web"/></svg>
-  <div class="seasonal-trim" aria-hidden="true">
-    <svg class="seasonal-bat" focusable="false"><use href="#seasonal-bat"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-    <svg focusable="false"><use href="#seasonal-pumpkin"/></svg>
-  </div>
   <p class="section-label">Kontakt</p>
   <h2>Ta kontakt</h2>
   <p class="section-intro">Vi svarer raskt — enten du har et konkret prosjekt, ønsker et tilbud, eller bare lurer på om vi kan hjelpe.</p>
@@ -585,151 +475,9 @@
   <a href="#" class="logo">Kira<span>kuna</span></a>
   <span class="footer-copy">© 2026 Kirakuna AS. Alle rettigheter reservert.</span>
   <div class="footer-links"><a href="mailto:post@kirakuna.no">post@kirakuna.no</a><a href="tel:+4747442800">474 42 800</a></div>
-  <div class="halloween-slot">
-    <aside class="halloween-greeting" id="halloween-greeting" aria-label="Halloween-hilsen" hidden>
-      <svg aria-hidden="true" focusable="false"><use href="#seasonal-pumpkin"/></svg>
-      <div role="status"><strong>God halloween!</strong><p>Bare gresskar her – ingen skumle overraskelser.</p></div>
-      <button class="halloween-close" type="button" aria-label="Lukk halloween-hilsen">×</button>
-    </aside>
-  </div>
 </footer>
 
 <script>
-  // Native Web Audio autoplay only when permitted; no unrelated gesture unlocks.
-  (() => {
-    const button = document.querySelector('.sound-toggle');
-    const note = document.getElementById('sound-note');
-    const AudioEngine = window.AudioContext || window.webkitAudioContext;
-    let active = null;
-    const render = on => {
-      button.setAttribute('aria-pressed', String(on));
-      button.textContent = `Halloween-lyd: ${on ? 'på – slå av' : 'av – start lyd'}`;
-    };
-    function stop() {
-      const sound = active;
-      active = null;
-      render(false);
-      if (!sound) return;
-      clearTimeout(sound.timeout);
-      if (sound.cancel) sound.cancel();
-      const { context, master, sources } = sound;
-      const now = context.currentTime;
-      master.gain.cancelScheduledValues(0);
-      master.gain.value = 0;
-      master.gain.setValueAtTime(0, 0);
-      sources.forEach(source => { try { source.stop(); } catch (_) { /* Already stopped. */ } });
-      // Hidden pages must not depend on a throttled timer to become silent.
-      context.close().catch(() => {});
-    }
-    if (!AudioEngine) {
-      button.disabled = true;
-      note.textContent = 'Nettleseren støtter ikke denne valgfrie lyden.';
-      return;
-    }
-    async function start(autoplay = false) {
-      if (active || document.hidden) return;
-      let sound;
-      try {
-        const context = new AudioEngine();
-        const master = context.createGain();
-        master.gain.value = 0;
-        master.connect(context.destination);
-        sound = { context, master, sources:[] };
-        active = sound;
-        // Close a blocked context immediately so unrelated gestures cannot unlock it.
-        if (autoplay && context.state !== 'running') {
-          stop();
-          note.textContent = 'Automatisk lyd er blokkert. Trykk på «start lyd» for å spille.';
-          return;
-        }
-        render(false);
-        button.textContent = 'Halloween-lyd: starter – avbryt';
-        // Soft minor harmony with very slow pitch drift; no sharp transients.
-        [110, 164.81, 220.4, 261.63].forEach((frequency, index) => {
-          const tone = context.createOscillator();
-          const level = context.createGain();
-          const drift = context.createOscillator();
-          const depth = context.createGain();
-          tone.type = 'sine';
-          tone.frequency.value = frequency;
-          level.gain.value = index === 0 ? 0.35 : 0.16;
-          drift.frequency.value = 0.07 + index * 0.019;
-          depth.gain.value = 2.5;
-          drift.connect(depth).connect(tone.detune);
-          tone.connect(level).connect(master);
-          sound.sources.push(tone, drift);
-          tone.start();
-          drift.start();
-        });
-        // A browser may leave resume pending; stop and timeout both settle our wait.
-        const cancelled = new Promise(resolve => { sound.cancel = () => resolve(false); });
-        const timedOut = new Promise(resolve => { sound.timeout = setTimeout(() => resolve(false), 1500); });
-        const resumed = autoplay ? true : await Promise.race([context.resume().then(() => true), cancelled, timedOut]);
-        clearTimeout(sound.timeout);
-        // A second click or tab switch may have cancelled a pending resume.
-        if (active !== sound) return;
-        if (!resumed || document.hidden || context.state !== 'running') {
-          stop();
-          note.textContent = 'Lyden er av. Trykk på «start lyd» for å prøve igjen.';
-          return;
-        }
-        master.gain.linearRampToValueAtTime(0.07, context.currentTime + 2);
-        render(true);
-        note.textContent = 'Spøkelsesstemning spiller. Slå av med knappen eller ved å bytte fane.';
-        context.addEventListener('statechange', () => {
-          if (active === sound && context.state !== 'running') stop();
-        });
-      } catch (_) {
-        if (sound && active !== sound) return;
-        stop();
-        note.textContent = 'Lyden kunne ikke startes. Du kan prøve igjen med knappen.';
-      }
-    }
-    button.addEventListener('click', () => {
-      if (active) {
-        stop();
-        note.textContent = 'Lyden er av. Trykk på knappen for å starte igjen.';
-      } else start();
-    });
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stop();
-        note.textContent = 'Lyden er av. Trykk på knappen for å starte igjen.';
-      }
-    });
-    window.addEventListener('pagehide', stop);
-    start(true);
-  })();
-  // A quiet, in-flow greeting: never overlays contact links or takes focus.
-  (() => {
-    const greeting = document.getElementById('halloween-greeting');
-    const key = 'kirakuna-halloween-2026-seen';
-    let seen = false;
-    let userScrolled = false;
-    try { seen = sessionStorage.getItem(key) === '1'; } catch (_) { /* Memory-only fallback. */ }
-    function revealNearBottom() {
-      if (seen || !userScrolled || window.scrollY < 100) return;
-      const remaining = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
-      if (remaining > 100) return;
-      seen = true;
-      try { sessionStorage.setItem(key, '1'); } catch (_) { /* Still once for this document. */ }
-      greeting.hidden = false;
-    }
-    function arm(event) {
-      if (!event.isTrusted) return;
-      if (event.type === 'keydown' && !['End', 'PageDown', 'ArrowDown', ' '].includes(event.key)) return;
-      userScrolled = true;
-      requestAnimationFrame(revealNearBottom);
-    }
-    window.addEventListener('wheel', arm, { passive:true });
-    window.addEventListener('touchmove', arm, { passive:true });
-    window.addEventListener('keydown', arm);
-    // Scrollbar dragging also counts as deliberate scrolling, but initial restoration does not.
-    window.addEventListener('pointerdown', event => { if (event.isTrusted && event.clientX >= document.documentElement.clientWidth) userScrolled = true; }, { passive:true });
-    window.addEventListener('scroll', revealNearBottom, { passive:true });
-    greeting.querySelector('button').addEventListener('click', () => { greeting.hidden = true; });
-    greeting.addEventListener('keydown', event => { if (event.key === 'Escape') greeting.hidden = true; });
-  })();
   function toggleMenu(btn) {
     const menu = document.getElementById('mobile-menu');
     const open = menu.classList.toggle('open');
@@ -744,44 +492,21 @@
 
   const canvas = document.getElementById('network-canvas');
   const ctx = canvas.getContext('2d');
-  let W, H, nodes, animFrame, lastFrame = null, pumpkinTime = 0;
+  let W, H, nodes, animFrame;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  // Reuse the existing artwork as one cached sprite, not a new DOM layer or timer.
-  const pumpkinSprite = new Image();
-  pumpkinSprite.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">' +
-    document.getElementById('seasonal-pumpkin').innerHTML + '</svg>');
   function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
   function makeNodes(n) { return Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.35,vy:(Math.random()-0.5)*0.35,r:Math.random()*2+1.5,pulse:Math.random()*Math.PI*2})); }
-  function drawPumpkins() {
-    if (!pumpkinSprite.complete || !pumpkinSprite.naturalWidth) return;
-    const count = W < 769 ? 2 : 4;
-    for (let i = 0; i < count; i++) {
-      // Ten-second soft appearance, then eight seconds fully absent; staggered.
-      const phase = (pumpkinTime + i * 4.5) % 18;
-      if (phase >= 10) continue;
-      const node = nodes[i * 16];
-      const size = (W < 769 ? 26 : 34) + i * 3;
-      ctx.globalAlpha = 0.72 * Math.sin(Math.PI * phase / 10) ** 2;
-      ctx.drawImage(pumpkinSprite, node.x - size / 2, node.y - size / 2, size, size);
-    }
-    ctx.globalAlpha = 1;
-  }
-  function draw(timestamp) {
+  function draw() {
     if (document.hidden || reducedMotion.matches) { animFrame = null; return; }
-    if (lastFrame !== null) pumpkinTime += Math.min((timestamp - lastFrame) / 1000, 0.1);
-    lastFrame = timestamp;
     ctx.clearRect(0,0,W,H);
     nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;n.pulse+=0.02;});
     for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<160){ctx.beginPath();ctx.strokeStyle=`rgba(0,212,255,${(1-d/160)*0.35})`;ctx.lineWidth=0.7;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
     nodes.forEach(n=>{const g=(Math.sin(n.pulse)+1)/2*0.6+0.4;ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,212,255,${g})`;ctx.fill();});
-    drawPumpkins();
     animFrame=requestAnimationFrame(draw);
   }
   function syncNetworkAnimation() {
     cancelAnimationFrame(animFrame);
     animFrame = null;
-    lastFrame = null;
     if (!document.hidden && !reducedMotion.matches) animFrame = requestAnimationFrame(draw);
   }
   resize();nodes=makeNodes(65);syncNetworkAnimation();
